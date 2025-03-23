@@ -15,14 +15,23 @@ function App() {
     const entadamin = parseInt(event.target[1].value);
     const salida = parseInt(event.target[2].value);
     const salidaminu = parseInt(event.target[3].value);
+
+    const entrada2 = parseInt(event.target[4].value);
+    const entadamin2 = parseInt(event.target[5].value);
+    const salida2 = parseInt(event.target[6].value);
+    const salidaminu2 = parseInt(event.target[7].value);
     const operacion = salida - entrada;
     const Extras = horas - 8;
     const Nocturnas = salida - 21;
     setHoras(salida - entrada);
     setMinutos(entadamin + salidaminu);
-    if (operacion > 8) {
+    if (operacion > 8 && Nocturnas < 0) {
       setHorasExtras(Extras);
+    } else {
       setNocturnas(Nocturnas);
+    }
+    if (Nocturnas < 0) {
+      setNocturnas(0);
     }
     if (operacion <= 8) {
       setRecargos(Nocturnas);
@@ -45,23 +54,27 @@ function App() {
         <form className="form" onSubmit={handleSubmit}>
           <label>Entrada</label>
           <div className="input-container">
-            {/* <select type="select">
-              <option value="am">AM</option>
-              <option value="pm">PM</option>
-            </select> */}
             <input type="number" /> :
             <input type="number" />
           </div>
 
           <label>Salida</label>
           <div className="input-container">
-            {/* <select type="select">
-              <option value="am">AM</option>
-              <option value="pm">PM</option>
-            </select> */}
             <input type="number" /> :
             <input type="number" />
           </div>
+          {/* <hr />
+          <label>Entrada 2</label>
+          <div className="input-container">
+            <input type="number" /> :
+            <input type="number" />
+          </div>
+
+          <label>Salida 2</label>
+          <div className="input-container">
+            <input type="number" /> :
+            <input type="number" />
+          </div> */}
 
           <button className="button" type="submit">
             Enviar

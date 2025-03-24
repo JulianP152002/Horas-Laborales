@@ -123,7 +123,9 @@ function App() {
           </div>
           <hr />
 
-          <button onClick={handleClick}> Dos salidas</button>
+          <button className="button2" onClick={handleClick}>
+            {salida ? "Remover una salida" : "Dos Salidas"}
+          </button>
           {salida && (
             <>
               <label>Entrada 2</label>

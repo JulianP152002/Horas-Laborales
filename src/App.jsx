@@ -27,13 +27,14 @@ function App() {
       const entadamin2 = parseInt(event.target[6].value);
       const salida2 = parseInt(event.target[7].value);
       const salidaminu2 = parseInt(event.target[8].value);
-      console.log(entrada, salida, entrada2, salida2);
+      // console.log(entrada, salida, entrada2, salida2);
       const minutos = entadamin + salidaminu + entadamin2 + salidaminu2;
       const operacion = salida - entrada + salida2 - entrada2;
 
       const Nocturnas = salida2 - 21;
       const Extras = horas - 8;
-
+      const NewHorasExtra = Extras - nocturnas;
+      console.log(operacion, Nocturnas, Extras);
       setHoras(operacion);
       setMinutos(minutos);
       setNocturnas(Nocturnas);
@@ -47,7 +48,7 @@ function App() {
         setRecargos(Nocturnas);
       }
       if (operacion > 8 && Nocturnas > 0) {
-        setHorasExtras(Extras - Nocturnas);
+        setHorasExtras(NewHorasExtra);
       }
       if (Nocturnas < 0) {
         setNocturnas(0);
@@ -73,7 +74,8 @@ function App() {
 
       const Nocturnas = salida - 21;
       const Extras = horas - 8;
-      console.log(Nocturnas);
+      const NewHorasExtra = Extras - nocturnas;
+      console.log(operacion, Nocturnas, Extras);
       setHoras(operacion);
       setMinutos(minutos);
       setNocturnas(Nocturnas);
@@ -87,10 +89,10 @@ function App() {
         setRecargos(Nocturnas);
       }
       if (operacion > 8 && Nocturnas > 0) {
-        setHorasExtras(Extras - Nocturnas);
+        setHorasExtras(NewHorasExtra);
       }
       if (Nocturnas < 0) {
-        setNocturnas(0);
+        setNocturnas((nocturnas) => nocturnas);
       }
       if (operacion <= 8 && Nocturnas > 0) {
         setNocturnas(0);
@@ -147,11 +149,19 @@ function App() {
           </button>
         </form>
 
-        <h2>{`Van ${horas} horas ordinarias, con ${minutos} minutos`} </h2>
+        <h2>
+          {horas >= 8
+            ? `Van 8 horas ordinarias con ${minutos}`
+            : `Van ${horas} horas ordinarias, con ${minutos} minutos`}{" "}
+        </h2>
         {recargos > 0 ? <h2>{`Con ${recargos} recargos nocturnas`}</h2> : ""}
 
-        <h2>{`Van ${horasExtras} horas extra, con ${minutos} minutos`}</h2>
-        <h2>{`Van ${nocturnas} horas nocturnas`}</h2>
+        <h2>
+          {horasExtras > 0
+            ? `Van ${horasExtras} horas extra, con ${minutos} minutos`
+            : null}
+        </h2>
+        <h2>{nocturnas > 0 ? `Van ${nocturnas} horas nocturnas` : null}</h2>
       </div>
     </>
   );
